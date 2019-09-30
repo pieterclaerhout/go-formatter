@@ -9,12 +9,14 @@ import (
 )
 
 func Test_JSON_Valid(t *testing.T) {
-	actual := ydformatter.JSONString("{\"key\": 1}")
+	actual, err := ydformatter.JSONString("{\"key\": 1}")
 	assert.NotEmpty(t, actual)
+	assert.NoError(t, err)
 }
 
 func Test_JSON_Invalid(t *testing.T) {
 	expected := "{\"key\": 1"
-	actual := ydformatter.JSONString(expected)
-	assert.Equal(t, expected, actual)
+	actual, err := ydformatter.JSONString(expected)
+	assert.Empty(t, actual)
+	assert.Error(t, err)
 }
