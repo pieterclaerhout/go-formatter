@@ -1,4 +1,4 @@
-package ydformatter
+package formatter
 
 import (
 	"fmt"

@@ -1,4 +1,4 @@
-package ydformatter_test
+package formatter_test
 
 import (
 	"net/http"
@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pieterclaerhout/go-ydformatter"
+	"github.com/pieterclaerhout/go-formatter"
 )
 
 func Test_SQL(t *testing.T) {
@@ -21,7 +21,7 @@ func Test_SQL(t *testing.T) {
 
 	var tests = []test{
 		{"", false, nil},
-		{"throw-error", true, ydformatter.ErrSQLInvalidStatement},
+		{"throw-error", true, formatter.ErrSQLInvalidStatement},
 		{"foo bar", false, nil},
 		{"SELECT * From tbl_apps", true, nil},
 		{"SELECT * From `tbl_apps`", true, nil},
@@ -37,7 +37,7 @@ func Test_SQL(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.input, func(t *testing.T) {
 
-			actual, err := ydformatter.SQL(tc.input)
+			actual, err := formatter.SQL(tc.input)
 
 			if tc.shouldFormat {
 				assert.NotEqual(t, tc.input, actual)
@@ -54,10 +54,10 @@ func Test_SQL(t *testing.T) {
 
 func Test_ExchangeRates_InvalidURL(t *testing.T) {
 
-	ydformatter.FormatSQLAPIURL = "ht&@-tp://:aa"
+	formatter.FormatSQLAPIURL = "ht&@-tp://:aa"
 	defer resetSQLFormatURL()
 
-	actual, err := ydformatter.SQL("SELECT * From tbl_apps")
+	actual, err := formatter.SQL("SELECT * From tbl_apps")
 
 	assert.Error(t, err)
 	assert.Empty(t, actual)
@@ -66,7 +66,7 @@ func Test_ExchangeRates_InvalidURL(t *testing.T) {
 
 func Test_ExchangeRates_Timeout(t *testing.T) {
 
-	ydformatter.DefaultTimeout = 250 * time.Millisecond
+	formatter.DefaultTimeout = 250 * time.Millisecond
 
 	s := httptest.NewServer(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -77,10 +77,10 @@ func Test_ExchangeRates_Timeout(t *testing.T) {
 	)
 	defer s.Close()
 
-	ydformatter.FormatSQLAPIURL = s.URL
+	formatter.FormatSQLAPIURL = s.URL
 	defer resetSQLFormatURL()
 
-	actual, err := ydformatter.SQL("SELECT * From tbl_apps")
+	actual, err := formatter.SQL("SELECT * From tbl_apps")
 
 	assert.Error(t, err)
 	assert.Empty(t, actual)
@@ -96,10 +96,10 @@ func Test_ExchangeRates_ReadBodyError(t *testing.T) {
 	)
 	defer s.Close()
 
-	ydformatter.FormatSQLAPIURL = s.URL
+	formatter.FormatSQLAPIURL = s.URL
 	defer resetSQLFormatURL()
 
-	actual, err := ydformatter.SQL("SELECT * From tbl_apps")
+	actual, err := formatter.SQL("SELECT * From tbl_apps")
 
 	assert.Error(t, err)
 	assert.Empty(t, actual)
@@ -107,5 +107,5 @@ func Test_ExchangeRates_ReadBodyError(t *testing.T) {
 }
 
 func resetSQLFormatURL() {
-	ydformatter.FormatSQLAPIURL = ydformatter.DefaultFormatSQLAPIURL
+	formatter.FormatSQLAPIURL = formatter.DefaultFormatSQLAPIURL
 }

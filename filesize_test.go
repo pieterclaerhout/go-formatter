@@ -1,4 +1,4 @@
-package ydformatter_test
+package formatter_test
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pieterclaerhout/go-ydformatter"
+	"github.com/pieterclaerhout/go-formatter"
 )
 
 func Test_FileSize(t *testing.T) {
@@ -48,7 +48,7 @@ func Test_FileSize(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(fmt.Sprintf("%d", tc.input), func(t *testing.T) {
-			actual := ydformatter.FileSize(tc.input)
+			actual := formatter.FileSize(tc.input)
 			assert.Equal(t, actual, tc.expected)
 		})
 	}

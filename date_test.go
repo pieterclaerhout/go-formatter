@@ -1,4 +1,4 @@
-package ydformatter_test
+package formatter_test
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pieterclaerhout/go-ydformatter"
+	"github.com/pieterclaerhout/go-formatter"
 )
 
 func Test_UnixTimestamp(t *testing.T) {
@@ -28,7 +28,7 @@ func Test_UnixTimestamp(t *testing.T) {
 	for _, tc := range tests {
 		name := fmt.Sprintf("%v", tc)
 		t.Run(name, func(t *testing.T) {
-			actual := ydformatter.UnixTimestamp(tc.input, tc.layout)
+			actual := formatter.UnixTimestamp(tc.input, tc.layout)
 			assert.Equal(t, tc.expected, actual)
 		})
 	}
@@ -51,7 +51,7 @@ func Test_DurationAsMilliseconds(t *testing.T) {
 	for _, tc := range tests {
 		name := fmt.Sprintf("%v", tc)
 		t.Run(name, func(t *testing.T) {
-			actual := ydformatter.DurationInMilliseconds(tc.input)
+			actual := formatter.DurationInMilliseconds(tc.input)
 			assert.Equal(t, tc.expected, actual)
 		})
 	}

@@ -1,4 +1,4 @@
-module github.com/pieterclaerhout/go-ydformatter
+module github.com/pieterclaerhout/go-formatter
 
 go 1.13
 

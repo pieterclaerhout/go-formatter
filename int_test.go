@@ -1,11 +1,11 @@
-package ydformatter_test
+package formatter_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pieterclaerhout/go-ydformatter"
+	"github.com/pieterclaerhout/go-formatter"
 )
 
 func Test_IntWithSeparators(t *testing.T) {
@@ -41,7 +41,7 @@ func Test_IntWithSeparators(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			actual := ydformatter.IntWithSeparators(tc.input)
+			actual := formatter.IntWithSeparators(tc.input)
 			assert.Equal(t, tc.output, actual, tc.name)
 		})
 	}
