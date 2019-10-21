@@ -9,7 +9,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_Elapsed(t *testing.T) {
+func TestElapsed(t *testing.T) {
 
 	type test struct {
 		input    int64

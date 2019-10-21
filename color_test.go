@@ -8,7 +8,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_Color(t *testing.T) {
+func TestColor(t *testing.T) {
 
 	type test struct {
 		input    string

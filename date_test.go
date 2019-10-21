@@ -10,7 +10,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_UnixTimestamp(t *testing.T) {
+func TestUnixTimestamp(t *testing.T) {
 
 	type test struct {
 		input    int64
@@ -35,7 +35,7 @@ func Test_UnixTimestamp(t *testing.T) {
 
 }
 
-func Test_DurationAsMilliseconds(t *testing.T) {
+func TestDurationAsMilliseconds(t *testing.T) {
 
 	type test struct {
 		input    time.Duration

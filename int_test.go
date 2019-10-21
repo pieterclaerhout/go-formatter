@@ -8,7 +8,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_IntWithSeparators(t *testing.T) {
+func TestIntWithSeparators(t *testing.T) {
 
 	type test struct {
 		name   string

@@ -9,7 +9,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_FileSize(t *testing.T) {
+func TestFileSize(t *testing.T) {
 
 	type test struct {
 		input    int64

@@ -8,7 +8,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_FormatXML_Valid(t *testing.T) {
+func TestFormatXMLValid(t *testing.T) {
 
 	source := "<root><data attrib=\"value\">data</data></root>"
 	expected := `<root>
@@ -21,7 +21,7 @@ func Test_FormatXML_Valid(t *testing.T) {
 
 }
 
-func Test_FormatXML_Invalid(t *testing.T) {
+func TestFormatXMLInvalid(t *testing.T) {
 
 	source := "<root"
 

@@ -11,7 +11,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_SQL(t *testing.T) {
+func TestSQL(t *testing.T) {
 
 	type test struct {
 		input         string
@@ -52,7 +52,7 @@ func Test_SQL(t *testing.T) {
 
 }
 
-func Test_ExchangeRates_InvalidURL(t *testing.T) {
+func TestSQLInvalidURL(t *testing.T) {
 
 	formatter.FormatSQLAPIURL = "ht&@-tp://:aa"
 	defer resetSQLFormatURL()
@@ -64,7 +64,7 @@ func Test_ExchangeRates_InvalidURL(t *testing.T) {
 
 }
 
-func Test_ExchangeRates_Timeout(t *testing.T) {
+func TestSQLTimeout(t *testing.T) {
 
 	formatter.DefaultTimeout = 250 * time.Millisecond
 
@@ -87,7 +87,7 @@ func Test_ExchangeRates_Timeout(t *testing.T) {
 
 }
 
-func Test_ExchangeRates_ReadBodyError(t *testing.T) {
+func TestSQLReadBodyError(t *testing.T) {
 
 	s := httptest.NewServer(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

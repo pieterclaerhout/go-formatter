@@ -9,7 +9,7 @@ import (
 	"github.com/pieterclaerhout/go-formatter"
 )
 
-func Test_Float(t *testing.T) {
+func TestFloat(t *testing.T) {
 
 	type test struct {
 		input     float64
