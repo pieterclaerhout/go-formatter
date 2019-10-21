@@ -17,13 +17,13 @@ func TestColor(t *testing.T) {
 
 	var tests = []test{
 		{"aaaaaa", "AAAAAA"},
-		{"aaaaaaa", "AAAAAA"},
-		{"#aaaaaa", "AAAAAA"},
-		{"#aaaaaaa", "AAAAAA"},
-		{"aaaAAA", "AAAAAA"},
-		{"aaaaAAA", "AAAAAA"},
-		{"#aaaAAA", "AAAAAA"},
-		{"#aaaAAAa", "AAAAAA"},
+		{"bbbbbbb", "BBBBBB"},
+		{"#cccccc", "CCCCCC"},
+		{"#ddddddd", "DDDDDD"},
+		{"eeeAAA", "EEEAAA"},
+		{"aaaaCCC", "AAAACC"},
+		{"#aaaBBB", "AAABBB"},
+		{"#bbbAAAa", "BBBAAA"},
 		{"#abc", "AABBCC"},
 		{"#efe", "EEFFEE"},
 	}

@@ -24,7 +24,7 @@ func TestSQL(t *testing.T) {
 		{"throw-error", true, formatter.ErrSQLInvalidStatement},
 		{"foo bar", false, nil},
 		{"SELECT * From tbl_apps", true, nil},
-		{"SELECT * From `tbl_apps`", true, nil},
+		{"SELECT * From `tbl_users`", true, nil},
 		{"select left(id, 3), coalesce(a.name, \"\") as name, * from `user_items` join apps on a.id = ui.app_id where user_id=? order by created_at limit 3 offset 10", true, nil},
 		{"SELECT * From table", true, nil},
 		{"SELECT * From table where id in (select id from other_table)", true, nil},
@@ -69,7 +69,7 @@ func TestSQLTimeout(t *testing.T) {
 	formatter.DefaultTimeout = 250 * time.Millisecond
 
 	s := httptest.NewServer(
-		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			time.Sleep(500 * time.Millisecond)
 			w.Header().Set("Content-Type", "text/plain")
 			w.Write([]byte("hello"))
@@ -90,7 +90,7 @@ func TestSQLTimeout(t *testing.T) {
 func TestSQLReadBodyError(t *testing.T) {
 
 	s := httptest.NewServer(
-		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.Header().Set("Content-Length", "1")
 		}),
 	)
