@@ -56,7 +56,7 @@ func TestSQLInvalidURL(t *testing.T) {
 	formatter.FormatSQLAPIURL = "ht&@-tp://:aa"
 	defer resetSQLFormatURL()
 
-	actual, err := formatter.SQL("SELECT * From tbl_apps")
+	actual, err := formatter.SQL("SELECT * From invalid_url")
 
 	assert.Error(t, err)
 	assert.Empty(t, actual)
@@ -79,7 +79,7 @@ func TestSQLTimeout(t *testing.T) {
 	formatter.FormatSQLAPIURL = s.URL
 	defer resetSQLFormatURL()
 
-	actual, err := formatter.SQL("SELECT * From tbl_apps")
+	actual, err := formatter.SQL("SELECT * From timeout")
 
 	assert.Error(t, err)
 	assert.Empty(t, actual)
@@ -98,7 +98,7 @@ func TestSQLReadBodyError(t *testing.T) {
 	formatter.FormatSQLAPIURL = s.URL
 	defer resetSQLFormatURL()
 
-	actual, err := formatter.SQL("SELECT * From tbl_apps")
+	actual, err := formatter.SQL("SELECT * From body_error")
 
 	assert.Error(t, err)
 	assert.Empty(t, actual)
