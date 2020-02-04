@@ -12,7 +12,7 @@ func JSONBytes(data []byte) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return string(data), nil
+	return string(out.Bytes()), nil
 }
 
 // JSONString pretty prints a JSON string
