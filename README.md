@@ -1,5 +1,6 @@
 ## go-formatter
 
+[![Build Status](https://img.shields.io/github/workflow/status/pieterclaerhout/go-formatter/Go)](https://github.com/pieterclaerhout/go-formatter/actions?query=workflow%3AGo)
 [![Go Report Card](https://goreportcard.com/badge/github.com/pieterclaerhout/go-formatter)](https://goreportcard.com/report/github.com/pieterclaerhout/go-formatter)
 [![Documentation](https://godoc.org/github.com/pieterclaerhout/go-formatter?status.svg)](http://godoc.org/github.com/pieterclaerhout/go-formatter)
 [![license](https://img.shields.io/badge/license-Apache%20v2-orange.svg)](https://github.com/pieterclaerhout/go-formatter/raw/master/LICENSE)
