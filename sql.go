@@ -1,14 +1,10 @@
 package formatter
 
 import (
-	"io/ioutil"
-	"net/http"
-	"net/url"
-	"strings"
 	"time"
 
+	"github.com/pieterclaerhout/go-formatter/sqlformatter"
 	"github.com/pkg/errors"
-	"github.com/tidwall/gjson"
 )
 
 var (
@@ -36,33 +32,35 @@ func SQL(sql string) (string, error) {
 		return "", ErrSQLInvalidStatement
 	}
 
-	var formValues = url.Values{}
-	formValues.Add("sql", sql)
-	formValues.Add("reindent", "1")
-	formValues.Add("identifier_case", "lower")
-	formValues.Add("keyword_case", "upper")
+	return sqlformatter.Format(sql), nil
 
-	req, err := http.NewRequest("POST", FormatSQLAPIURL, strings.NewReader(formValues.Encode()))
-	if err != nil {
-		return "", err
-	}
+	// var formValues = url.Values{}
+	// formValues.Add("sql", sql)
+	// formValues.Add("reindent", "1")
+	// formValues.Add("identifier_case", "lower")
+	// formValues.Add("keyword_case", "upper")
 
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	// req, err := http.NewRequest("POST", FormatSQLAPIURL, strings.NewReader(formValues.Encode()))
+	// if err != nil {
+	// 	return "", err
+	// }
 
-	client := &http.Client{}
-	client.Timeout = DefaultTimeout
+	// req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	resp, err := client.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
+	// client := &http.Client{}
+	// client.Timeout = DefaultTimeout
 
-	respBody, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
+	// resp, err := client.Do(req)
+	// if err != nil {
+	// 	return "", err
+	// }
+	// defer resp.Body.Close()
 
-	return gjson.GetBytes(respBody, "result").String(), nil
+	// respBody, err := ioutil.ReadAll(resp.Body)
+	// if err != nil {
+	// 	return "", err
+	// }
+
+	// return gjson.GetBytes(respBody, "result").String(), nil
 
 }

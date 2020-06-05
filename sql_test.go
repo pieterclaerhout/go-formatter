@@ -6,9 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/pieterclaerhout/go-formatter"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSQL(t *testing.T) {
