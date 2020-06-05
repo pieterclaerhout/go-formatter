@@ -1,10 +1,7 @@
 package formatter_test
 
 import (
-	"net/http"
-	"net/http/httptest"
 	"testing"
-	"time"
 
 	"github.com/pieterclaerhout/go-formatter"
 	"github.com/stretchr/testify/assert"
@@ -48,62 +45,4 @@ func TestSQL(t *testing.T) {
 		})
 	}
 
-}
-
-func TestSQLInvalidURL(t *testing.T) {
-
-	formatter.FormatSQLAPIURL = "ht&@-tp://:aa"
-	defer resetSQLFormatURL()
-
-	actual, err := formatter.SQL("SELECT * From invalid_url")
-
-	assert.Error(t, err)
-	assert.Empty(t, actual)
-
-}
-
-func TestSQLTimeout(t *testing.T) {
-
-	formatter.DefaultTimeout = 250 * time.Millisecond
-
-	s := httptest.NewServer(
-		http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-			time.Sleep(500 * time.Millisecond)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte("hello"))
-		}),
-	)
-	defer s.Close()
-
-	formatter.FormatSQLAPIURL = s.URL
-	defer resetSQLFormatURL()
-
-	actual, err := formatter.SQL("SELECT * From timeout")
-
-	assert.Error(t, err)
-	assert.Empty(t, actual)
-
-}
-
-func TestSQLReadBodyError(t *testing.T) {
-
-	s := httptest.NewServer(
-		http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-			w.Header().Set("Content-Length", "1")
-		}),
-	)
-	defer s.Close()
-
-	formatter.FormatSQLAPIURL = s.URL
-	defer resetSQLFormatURL()
-
-	actual, err := formatter.SQL("SELECT * From body_error")
-
-	assert.Error(t, err)
-	assert.Empty(t, actual)
-
-}
-
-func resetSQLFormatURL() {
-	formatter.FormatSQLAPIURL = formatter.DefaultFormatSQLAPIURL
 }
